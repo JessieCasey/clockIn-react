@@ -1,0 +1,28 @@
+.content {
+    margin-top: 100px;
+    background-image: url('/public/backgrounds/main-background.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+    height: 700px;
+    background-position: center; /* Added line to center the image */
+}
+.layout {
+    padding: 20px;
+}
+.content > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+}

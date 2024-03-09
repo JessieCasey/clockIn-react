@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
+
+:root {
+    --font: 'Syne', sans-serif;
+    --primary-color: #79FA9D;
+    --primary-hover-color: #63D683;
+    --bg-color: #121215;
+    --bg-button-color: #0D0D0E;
+    --button-text-color: #000000;
+    --text-color: #E6E6E6;
+    --text-secondary-color: #B4B6BE;
+    --border-color: #292934;
+    --white-color: #FFFFFF;
+}
+
+
+body {
+    font-family: var(--font);
+    background: var(--bg-color);
+    color: var(--text-color)
+}
