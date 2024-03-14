@@ -7,7 +7,8 @@ import {AppDispatch, RootState} from '../../store/store.ts';
 import {register, userActions} from '../../store/user.slice.ts';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/Button/Button.tsx';
-import Paragraph from "../../components/Paragraph/Paragraph.tsx";
+import Paragraph from '../../components/Paragraph/Paragraph.tsx';
+import CustomLink from '../../components/Link/CustomLink.tsx';
 
 export type RegisterForm = {
     username: {
@@ -52,8 +53,10 @@ export function Register() {
                 <form className={styles['form']} onSubmit={submit}>
                     <Input id="username" name='username' placeholder='Alex' labelText="How to call you?"/>
                     <Input id="email" name='email' placeholder='Email' labelText="Email"/>
-                    <Paragraph>No password required. We will send you a link with access <br/> to your account</Paragraph>
+                    <Paragraph>No password required. We will send you a link with access <br/> to your
+                        account</Paragraph>
                     <Button>Confirm</Button>
+                    <CustomLink to={'/authorization/sign-in'}>Already have an account? Then sign in!</CustomLink>
                 </form>
             </>
         )}

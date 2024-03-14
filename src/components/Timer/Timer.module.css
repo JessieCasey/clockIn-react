@@ -1,0 +1,46 @@
+.logo-wrapper {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
+    color: var(--text-color);
+    transition-duration: 0.3s;
+}
+
+.logo-wrapper:hover {
+    color: var(--text-secondary-color);
+}
+
+.logo-img {
+    width: 45px;
+    height: 45px;
+}
+
+.circle-timer {
+    margin-top: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.chest-img {
+    position: absolute;
+    top: 73px;
+}
+
+.chest-img img {
+    height: 150px;
+    user-select: none;
+}
+
+.timer-panel {
+    display: flex;
+    gap: 15px;
+}

@@ -2,7 +2,7 @@ import styles from './Greeting.module.css';
 import Button from '../../components/Button/Button.tsx';
 import Headline from '../../components/Heading/Headline.tsx';
 import {useNavigate} from 'react-router-dom';
-import Logo from "../../components/Logo/Logo.tsx";
+import Logo from '../../components/Logo/Logo.tsx';
 
 export function Greeting() {
     const navigate = useNavigate();

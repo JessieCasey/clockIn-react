@@ -7,7 +7,7 @@ import {AppDispatch, RootState} from '../../store/store.ts';
 import {register, userActions} from '../../store/user.slice.ts';
 import Input from '../../components/Input/Input.tsx';
 import Button from '../../components/Button/Button.tsx';
-import Paragraph from "../../components/Paragraph/Paragraph.tsx";
+import Paragraph from '../../components/Paragraph/Paragraph.tsx';
 
 export type RegisterForm = {
     username: {

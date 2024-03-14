@@ -6,12 +6,13 @@ import {Error as ErrorPage} from './pages/Error/Error.tsx';
 import {Login} from './pages/Login/Login.tsx';
 import {Layout} from './layout/Layout/Layout.tsx';
 import {Register} from './pages/Register/Register.tsx';
-import {Provider} from "react-redux";
-import {store} from "./store/store.ts";
-import {Home} from "./pages/Home/Home.tsx";
-import {RequireAuth} from "./helpers/RequireAuth.tsx";
-import {Greeting} from "./pages/Greeting/Greeting.tsx";
-import {ConfirmLogin} from "./pages/ConfirmLogin/ConfirmLogin.tsx";
+import {Provider} from 'react-redux';
+import {store} from './store/store.ts';
+import {Home} from './pages/Home/Home.tsx';
+import {RequireAuth} from './helpers/RequireAuth.tsx';
+import {Greeting} from './pages/Greeting/Greeting.tsx';
+import {ConfirmLogin} from './pages/ConfirmLogin/ConfirmLogin.tsx';
+import {Cards} from './pages/Cards/Cards.tsx';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home/>
+            },
+            {
+                path: '/cards',
+                element: <Cards/>
             }
         ]
     },

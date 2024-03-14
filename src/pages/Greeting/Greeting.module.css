@@ -11,9 +11,11 @@
     height: 700px;
     background-position: center; /* Added line to center the image */
 }
+
 .layout {
     padding: 20px;
 }
+
 .content > div {
     display: flex;
     flex-direction: column;

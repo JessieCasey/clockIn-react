@@ -6,9 +6,10 @@ import Input from '../../components/Input/Input';
 import {FormEvent, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {login, userActions} from '../../store/user.slice';
-import Headline from "../../components/Heading/Headline.tsx";
-import Paragraph from "../../components/Paragraph/Paragraph.tsx";
-import {AppDispatch, RootState} from "../../store/store.ts";
+import Headline from '../../components/Heading/Headline.tsx';
+import Paragraph from '../../components/Paragraph/Paragraph.tsx';
+import {AppDispatch, RootState} from '../../store/store.ts';
+import CustomLink from '../../components/Link/CustomLink.tsx';
 
 export type LoginForm = {
     email: {
@@ -55,6 +56,7 @@ export function Login() {
                     <Paragraph>No password required. We will send you a link with access <br/> to your
                         account</Paragraph>
                     <Button>Confirm</Button>
+                    <CustomLink to={'/authorization/sign-up'}>Don’t have an account yet? Create one!</CustomLink>
                 </form>
             </>
         )}

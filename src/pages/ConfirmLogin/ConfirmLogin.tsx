@@ -1,10 +1,10 @@
 import styles from './ConfirmLogin.module.css';
-import Headline from "../../components/Heading/Headline.tsx";
-import {useEffect} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../../store/store.ts";
-import {confirmLogin} from "../../store/user.slice.ts";
+import Headline from '../../components/Heading/Headline.tsx';
+import {useEffect} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../store/store.ts';
+import {confirmLogin} from '../../store/user.slice.ts';
 
 export function ConfirmLogin() {
     const location = useLocation();
@@ -22,7 +22,7 @@ export function ConfirmLogin() {
             dispatch(confirmLogin({email: email, token: token}));
         }
 
-    }, [email, token]);
+    }, [email, token, dispatch]);
 
     useEffect(() => {
         // Do something with email and token
@@ -30,7 +30,7 @@ export function ConfirmLogin() {
             navigate('/');
         }
 
-    }, [jwt]);
+    }, [jwt, navigate]);
 
     return (
         <div className={styles['content']}>

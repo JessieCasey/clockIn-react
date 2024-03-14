@@ -2,8 +2,13 @@
 
 :root {
     --font: 'Syne', sans-serif;
-    --primary-color: #79FA9D;
+    --primary-color: #40ec71;
     --primary-hover-color: #63D683;
+    --side-menu-bg: #1b1b21;
+
+    --side-menu-border-color-hover: #647268;
+
+    --icon-color: #464646;
     --bg-color: #121215;
     --bg-button-color: #0D0D0E;
     --button-text-color: #000000;
@@ -11,6 +16,13 @@
     --text-secondary-color: #B4B6BE;
     --border-color: #292934;
     --white-color: #FFFFFF;
+
+    --card-width: 130px;
+    --card-height: 130px;
+
+    --common-rarity-color: #84A6FF;
+    --rare-rarity-color: #FFB084;
+    --epic-rarity-color: #FF84C6;
 }
 
 

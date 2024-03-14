@@ -3,6 +3,8 @@ import {loadState} from './storage';
 import {LoginResponse} from '../interfaces/auth.interface';
 import axios, {AxiosError} from 'axios';
 import {PREFIX} from '../helpers/API';
+import {Profile} from '../interfaces/user.interface.ts';
+import {RootState} from './store.ts';
 
 export const JWT_PERSISTENT_STATE = 'userData';
 
@@ -15,6 +17,7 @@ export interface UserState {
     loginErrorMessage?: string;
     registerErrorMessage?: string;
     linkSent?: boolean;
+    profile?: Profile;
 }
 
 const initialState: UserState = {
@@ -61,7 +64,25 @@ export const register = createAsyncThunk('user/register',
             return data;
         } catch (e) {
             if (e instanceof AxiosError) {
-                throw new Error(e.response?.data.message);
+                throw new Error(e.response?.data.errorDetails);
+            }
+        }
+    }
+);
+
+export const getProfile = createAsyncThunk<Profile, void, { state: RootState }>('user/getProfile',
+    async (_, thunkApi) => {
+        try {
+            const jwt = thunkApi.getState().user.jwt;
+            const {data} = await axios.get(`${PREFIX}/users/profile`, {
+                headers: {
+                    'Authorization': 'Bearer ' + jwt
+                }
+            });
+            return data;
+        } catch (e) {
+            if (e instanceof AxiosError) {
+                throw new Error(e.response?.data.errorDetails);
             }
         }
     }
@@ -71,6 +92,9 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        logout: (state) => {
+            state.jwt = null;
+        },
         clearRegisterError: (state) => {
             state.registerErrorMessage = undefined;
         },
@@ -79,6 +103,12 @@ export const userSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
+        builder.addCase(getProfile.fulfilled, (state, action) => {
+            state.profile = action.payload;
+        });
+        builder.addCase(getProfile.rejected, () => {
+            // state.jwt = null;
+        });
         builder.addCase(confirmLogin.fulfilled, (state, action) => {
             if (!action.payload) {
                 return;
@@ -89,19 +119,16 @@ export const userSlice = createSlice({
             state.loginErrorMessage = action.error.message;
         });
         builder.addCase(login.fulfilled, (state, action) => {
+            state.linkSent = true;
             if (!action.payload) {
                 return;
             }
-            state.linkSent = true;
         });
         builder.addCase(login.rejected, (state, action) => {
             state.linkSent = false;
             state.registerErrorMessage = action.error.message;
         });
-        builder.addCase(register.fulfilled, (state, action) => {
-            if (!action.payload) {
-                return;
-            }
+        builder.addCase(register.fulfilled, (state) => {
             state.linkSent = true;
         });
         builder.addCase(register.rejected, (state, action) => {
