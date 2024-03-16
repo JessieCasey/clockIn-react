@@ -5,47 +5,74 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import RarityLabel from '../../components/RarityLabel/RarityLabel.tsx';
 import {Rarity} from '../../interfaces/rarity.interfaces.ts';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store/store.ts';
+import {useEffect, useState} from 'react';
+import {UserCards} from '../../interfaces/user.interface.ts';
 
 export function Cards() {
-    // Create an array to hold the IDs for 15 cards
-    const cardIds = Array.from({length: 15}, (_, index) => index + 1);
+    const [cardsRarityIndex, setCardsRarityIndex] = useState<number>(0);
+    const [cardsToDisplay, setCardsToDisplay] = useState<UserCards | null>(null);
+    const rarities: Rarity[] = [Rarity.COMMON, Rarity.RARE, Rarity.EPIC];
+    const cards = useSelector((state: RootState) => state.cards);
+
+
+    useEffect(() => {
+        setCardsToDisplay(cards.commonCards);
+    }, [cards.commonCards]);
+
+    useEffect(() => {
+        switch (cardsRarityIndex) {
+            case 0:
+                setCardsToDisplay(cards.commonCards);
+                break;
+            case 1:
+                setCardsToDisplay(cards.rareCards);
+                break;
+            case 2:
+                setCardsToDisplay(cards.epicCards);
+                break;
+        }
+
+    }, [cardsRarityIndex, cards]);
+    const handleNextRarity = () => {
+        setCardsRarityIndex((prevIndex) => (prevIndex + 1) % rarities.length);
+    };
+
+    const handlePreviousRarity = () => {
+        setCardsRarityIndex((prevIndex) => (prevIndex - 1 + rarities.length) % rarities.length);
+    };
 
     return (
-        <div className={styles['layout']}>
+        <div className={styles.layout}>
             <div className={styles['control-menu']}>
-                <div>
-                    <FontAwesomeIcon className={styles['button']} icon={faChevronLeft}/>
+                <div onClick={handlePreviousRarity}>
+                    <FontAwesomeIcon className={styles.button} icon={faChevronLeft}/>
                 </div>
                 <div>
-                    <Headline>Medieval (3/12)</Headline>
-                    <RarityLabel rarity={Rarity.COMMON}>Common rarity</RarityLabel>
+                    {/* Display rarity based on selected rarity */}
+                    <Headline>Medieval</Headline>
+                    <RarityLabel rarity={rarities[cardsRarityIndex]}>
+                        {`${rarities[cardsRarityIndex].valueOf().toLowerCase()} rarity`}
+                    </RarityLabel>
                 </div>
-                <div>
-                    <FontAwesomeIcon className={styles['button']} icon={faChevronRight}/>
+                <div onClick={handleNextRarity}>
+                    <FontAwesomeIcon className={styles.button} icon={faChevronRight}/>
                 </div>
             </div>
-            <div className={styles['cards']}>
-                {/* Map over the cardIds array and render a Card component for each ID */}
-                <Card
-                    key={'2'} // Always include a unique key prop when rendering a list of components
-                    id={'2'.toString()} // Convert id to string if needed
-                    name={`Card ${'2'}`} // Example name
-                    description={`Description about Card ${'2'}`} // Example description
-                    rarity={'COMMON'} // Example rarity
-                    imageUrl={'https://clickin-storage.s3.eu-central-1.amazonaws.com/adventurer_01_00_high_res.png'} // Example image URL
-                    foundByUser={true} // Example foundByUser
-                />
-                {cardIds.map(id => (
+            <div className={styles.cards}>
+                {/* Display cards based on selected rarity */}
+                {cardsToDisplay && cardsToDisplay.cards.map((card => (
                     <Card
-                        key={id} // Always include a unique key prop when rendering a list of components
-                        id={id.toString()} // Convert id to string if needed
-                        name={`Card ${id}`} // Example name
-                        description={`Description about Card ${id}`} // Example description
-                        rarity={'COMMON'} // Example rarity
-                        imageUrl={'https://clickin-storage.s3.eu-central-1.amazonaws.com/adventurer_01_00_high_res.png'} // Example image URL
-                        foundByUser={false} // Example foundByUser
+                        key={card.id}
+                        id={card.id}
+                        name={card.name}
+                        description={card.description}
+                        rarity={card.rarity}
+                        imageUrl={card.imageUrl}
+                        foundByUser={card.foundByUser}
                     />
-                ))}
+                )))}
             </div>
         </div>
     );

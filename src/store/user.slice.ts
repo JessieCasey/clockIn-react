@@ -6,6 +6,7 @@ import {PREFIX} from '../helpers/API';
 import {Profile} from '../interfaces/user.interface.ts';
 import {RootState} from './store.ts';
 
+export const PROFILE_PERSISTENT_STATE = 'profileData';
 export const JWT_PERSISTENT_STATE = 'userData';
 
 export interface UserPersistentState {
@@ -14,14 +15,15 @@ export interface UserPersistentState {
 
 export interface UserState {
     jwt: string | null;
+    profile?: Profile | null;
     loginErrorMessage?: string;
     registerErrorMessage?: string;
     linkSent?: boolean;
-    profile?: Profile;
 }
 
 const initialState: UserState = {
-    jwt: loadState<UserPersistentState>(JWT_PERSISTENT_STATE)?.jwt ?? null
+    jwt: loadState<UserPersistentState>(JWT_PERSISTENT_STATE)?.jwt ?? null,
+    profile: loadState<Profile>(PROFILE_PERSISTENT_STATE) ?? null
 };
 
 export const confirmLogin = createAsyncThunk('user/login-confirm',
@@ -94,6 +96,7 @@ export const userSlice = createSlice({
     reducers: {
         logout: (state) => {
             state.jwt = null;
+            state.profile = null;
         },
         clearRegisterError: (state) => {
             state.registerErrorMessage = undefined;
@@ -106,8 +109,8 @@ export const userSlice = createSlice({
         builder.addCase(getProfile.fulfilled, (state, action) => {
             state.profile = action.payload;
         });
-        builder.addCase(getProfile.rejected, () => {
-            // state.jwt = null;
+        builder.addCase(getProfile.rejected, (state) => {
+            state.profile = null;
         });
         builder.addCase(confirmLogin.fulfilled, (state, action) => {
             if (!action.payload) {

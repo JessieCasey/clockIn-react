@@ -6,6 +6,22 @@ export interface Card {
     description: string;
     rarity: Rarity;
     imageUrl: string;
+    foundByUser: boolean;
+}
+
+export interface UserCards {
+    cards: Card[];
+    totalAmount: number;
+    userFoundAmount: number;
+}
+
+export interface UserCardsList {
+    commonCards: UserCards;
+    rareCards: UserCards;
+    epicCards: UserCards;
+
+    loading: boolean,
+    error: string | null
 }
 
 export interface Profile {
@@ -13,5 +29,4 @@ export interface Profile {
     email: string;
     username: string;
     minutesSaved: number;
-    cards: Card[];
 }

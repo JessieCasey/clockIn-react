@@ -21,7 +21,7 @@ function Card({name, description, imageUrl, foundByUser, ...props}: CardProps) {
         <div className={styles['card']}
              onClick={flipCard} {...props}>
             <div className={cn(styles['content'], {
-                [styles['flipped']]: isFlipped,
+                [styles['flipped']]: foundByUser && isFlipped,
                 [styles['grey-filter']]: !foundByUser,
                 [styles['cursor-pointer']]: foundByUser
             })}
