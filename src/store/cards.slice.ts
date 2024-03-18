@@ -29,25 +29,31 @@ const initialState: UserCardsList = {
 
 export const fetchCardsAsync = createAsyncThunk<UserCardsList, void, { state: RootState }>('user/fetchCardsAsync',
     async (_, thunkApi) => {
+    console.log("AWAKED");
         try {
             const jwt = thunkApi.getState().user.jwt;
             const profile = thunkApi.getState().user.profile;
             const userId = profile?.id;
+            console.log(userId);
             const commonResponse = await axios.get(`${PREFIX}/cards/users/${userId}?rarity=COMMON`, {
                 headers: {
                     'Authorization': 'Bearer ' + jwt
                 }
             });
+            console.log("common");
             const rareResponse = await axios.get(`${PREFIX}/cards/users/${userId}?rarity=RARE`, {
                 headers: {
                     'Authorization': 'Bearer ' + jwt
                 }
             });
+            console.log("rareResponse");
             const epicResponse = await axios.get(`${PREFIX}/cards/users/${userId}?rarity=EPIC`, {
                 headers: {
                     'Authorization': 'Bearer ' + jwt
                 }
             });
+            console.log("rareResponse");
+            console.log("GOT HERE");
             return {
                 commonCards: commonResponse.data,
                 rareCards: rareResponse.data,
@@ -64,6 +70,7 @@ export const fetchCardsAsync = createAsyncThunk<UserCardsList, void, { state: Ro
         }
     }
 );
+
 
 const cardsSlice = createSlice({
     name: 'cards',
@@ -82,6 +89,7 @@ const cardsSlice = createSlice({
                 state.epicCards = action.payload.epicCards;
             })
             .addCase(fetchCardsAsync.rejected, (state, action) => {
+                console.log(action.error.message)
                 state.loading = false;
                 state.error = action.error.message || 'Error occurred';
             });

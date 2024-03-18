@@ -4,7 +4,7 @@
     transition: background 0.25s;
     border: none;
     color: var(--button-text-color);
-    border-radius: 30px;
+    border-radius: 20px;
     font-style: normal;
     font-weight: 400;
 }
@@ -17,7 +17,7 @@
 .small-bold {
     font-size: 20px;
     font-weight: bold;
-    padding: 10px 25px;
+    padding: 0 25px;
 }
 
 .big {

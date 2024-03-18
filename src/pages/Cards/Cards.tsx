@@ -49,9 +49,9 @@ export function Cards() {
                 <div onClick={handlePreviousRarity}>
                     <FontAwesomeIcon className={styles.button} icon={faChevronLeft}/>
                 </div>
-                <div>
+                <div className={styles['header']}>
                     {/* Display rarity based on selected rarity */}
-                    <Headline>Medieval</Headline>
+                    <Headline>Medieval {`(${cardsToDisplay?.userFoundAmount}/${cardsToDisplay?.totalAmount})`}</Headline>
                     <RarityLabel rarity={rarities[cardsRarityIndex]}>
                         {`${rarities[cardsRarityIndex].valueOf().toLowerCase()} rarity`}
                     </RarityLabel>

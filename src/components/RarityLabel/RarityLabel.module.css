@@ -5,3 +5,15 @@
     font-weight: 400;
     margin: 0;
 }
+
+.COMMON {
+    color: var(--common-rarity-color);
+}
+
+.RARE {
+    color: var(--rare-rarity-color);
+}
+
+.EPIC {
+    color: var(--epic-rarity-color);
+}

@@ -10,14 +10,10 @@ function TimerInput({setDurationSec, remainingTime}: TimerInputProps) {
 
 
     useEffect(() => {
-        if (inputHours.trim().length > 0 && inputHours.match('[0-9]*')) {
-            setInputHours(String(Math.floor(remainingTime / 3600)).padStart(2, '0'));
-        } else {
-            setInputHours('00');
-        }
+        setInputHours(String(Math.floor(remainingTime / 3600)).padStart(2, '0'));
         setInputMinutes(String(Math.floor((remainingTime % 3600) / 60)).padStart(2, '0'));
         setInputSeconds(String(remainingTime % 60).padStart(2, '0'));
-    }, [remainingTime, inputHours]);
+    }, [remainingTime]);
 
 
     useEffect(() => {
@@ -30,8 +26,17 @@ function TimerInput({setDurationSec, remainingTime}: TimerInputProps) {
     }, [inputHours, inputMinutes, inputSeconds]);
 
     const handleCustomTimeChange = () => {
-        const totalSeconds = parseInt(inputHours) * 3600 + parseInt(inputMinutes) * 60 + parseInt(inputSeconds);
-        setDurationSec(totalSeconds);
+        const regExp = /^\d+$/;
+        if (regExp.test(inputHours)) {
+            const totalSeconds = parseInt(inputHours) * 3600 + parseInt(inputMinutes) * 60 + parseInt(inputSeconds);
+            setDurationSec(totalSeconds);
+        } else {
+            setInputHours('00');
+            setInputMinutes('00');
+            setInputSeconds('00');
+            setDurationSec(0);
+            console.error('Input hours must contain only numbers.');
+        }
     };
 
 

@@ -6,6 +6,11 @@
     font-size: 25px;
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 .layout {
     padding-top: 0;
     padding-right: 100px;
