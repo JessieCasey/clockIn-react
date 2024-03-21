@@ -6,7 +6,6 @@ import {PREFIX} from '../helpers/API.ts';
 
 export const CARD_PERSISTENT_STATE = 'cardsData';
 
-
 const initialState: UserCardsList = {
     commonCards: {
         cards: [],
@@ -29,7 +28,6 @@ const initialState: UserCardsList = {
 
 export const fetchCardsAsync = createAsyncThunk<UserCardsList, void, { state: RootState }>('user/fetchCardsAsync',
     async (_, thunkApi) => {
-    console.log("AWAKED");
         try {
             const jwt = thunkApi.getState().user.jwt;
             const profile = thunkApi.getState().user.profile;
@@ -40,20 +38,16 @@ export const fetchCardsAsync = createAsyncThunk<UserCardsList, void, { state: Ro
                     'Authorization': 'Bearer ' + jwt
                 }
             });
-            console.log("common");
             const rareResponse = await axios.get(`${PREFIX}/cards/users/${userId}?rarity=RARE`, {
                 headers: {
                     'Authorization': 'Bearer ' + jwt
                 }
             });
-            console.log("rareResponse");
             const epicResponse = await axios.get(`${PREFIX}/cards/users/${userId}?rarity=EPIC`, {
                 headers: {
                     'Authorization': 'Bearer ' + jwt
                 }
             });
-            console.log("rareResponse");
-            console.log("GOT HERE");
             return {
                 commonCards: commonResponse.data,
                 rareCards: rareResponse.data,

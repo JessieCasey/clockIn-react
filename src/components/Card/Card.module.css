@@ -13,6 +13,7 @@
     height: var(--card-height);
     border-radius: 14px;
     border: 1px solid #1F232F;
+    background-color: var(--bg-color);
     padding: 18px;
     transition-duration: 0.6s;
     display: flex;

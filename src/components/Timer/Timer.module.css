@@ -11,6 +11,41 @@
     transition-duration: 0.3s;
 }
 
+.chestAvailable {
+    cursor: pointer;
+    border: 1px solid #ffda41;
+    border-radius: 15px;
+    background: #ffda41;
+    animation: rainbowGlow 5s infinite alternate; /* Add rainbow glow animation */
+}
+
+@keyframes rainbowGlow {
+    0% {
+        border-color: #ffda41;
+        box-shadow: 0 0 10px #ffda41; /* Red shadow */
+    }
+    20% {
+        border-color: #ccfa26;
+        box-shadow: 0 0 10px #ccfa26; /* Red shadow */
+    }
+    40% {
+        border-color: #ffbd41;
+        box-shadow: 0 0 10px #ffbd41; /* Red shadow */
+    }
+    60% {
+        border-color: #f8ff22;
+        box-shadow: 0 0 10px #f8ff22; /* Red shadow */
+    }
+    80% {
+        border-color: #ff4183;
+        box-shadow: 0 0 10px #ff4183; /* Red shadow */
+    }
+    100% {
+        border-color: #ffe474;
+        box-shadow: 0 0 10px #ffe474; /* Red shadow */
+    }
+}
+
 .logo-wrapper:hover {
     color: var(--text-secondary-color);
 }
@@ -28,6 +63,11 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
+
+.circle-timer > div:first-child {
+    border-radius: 100%;
+    background-color: var(--bg-color);
 }
 
 .chest-img {

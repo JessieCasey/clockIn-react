@@ -81,6 +81,7 @@ export const getProfile = createAsyncThunk<Profile, void, { state: RootState }>(
                     'Authorization': 'Bearer ' + jwt
                 }
             });
+            console.log(data);
             return data;
         } catch (e) {
             if (e instanceof AxiosError) {

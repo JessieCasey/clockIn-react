@@ -28,5 +28,5 @@ export interface Profile {
     id: string;
     email: string;
     username: string;
-    minutesSaved: number;
+    secondsSaved: number;
 }
