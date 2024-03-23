@@ -18,7 +18,7 @@ function Card({name, description, imageUrl, foundByUser, ...props}: CardProps) {
     };
 
     return (
-        <div className={styles['card']}
+        <div className={cn(styles['card'], 'animate__animated animate__bounceIn')}
              onClick={flipCard} {...props}>
             <div className={cn(styles['content'], {
                 [styles['flipped']]: foundByUser && isFlipped,

@@ -35,3 +35,11 @@
     position: absolute;
     z-index: 999;
 }
+
+.version {
+    position: absolute;
+    bottom: 15px;
+    left: 50%; /* Align the version text to the center horizontally */
+    transform: translateX(-50%); /* Center the version text horizontally */
+    margin-bottom: 10px; /* Adjust this value to create space between the version text and the bottom */
+}

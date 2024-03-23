@@ -21,15 +21,15 @@ const timerProps = {
     colorsTime: []
 };
 
-function Timer({setWonCard, setChestOpen}: TimerProps) {
-    const [isPlaying, setPlaying] = useState(false);
+function Timer({setWonCard, setChestOpen, isPlaying, setPlaying}: TimerProps) {
+
     const [durationSec, setDurationSec] = useState(0); // Initial duration in seconds (10 minutes)
     const [remainingTime, setRemainingTime] = useState(durationSec); // Initial remaining time equals to durationSec
     const [chestAvailable, setChestAvailable] = useState<boolean>(false); // Initial remaining time equals to durationSec
 
     const dispatch = useDispatch<AppDispatch>();
     const {jwt, profile} = useSelector((s: RootState) => s.user);
-    const minuteSeconds = 30;
+    const secondsToHandle = 30;
 
     useEffect(() => {
         setRemainingTime(durationSec);
@@ -66,11 +66,11 @@ function Timer({setWonCard, setChestOpen}: TimerProps) {
     };
 
     const handleIncrement = () => {
-        setDurationSec(prevDuration => prevDuration + minuteSeconds);
+        setDurationSec(prevDuration => prevDuration + secondsToHandle);
     };
 
     const handleDecrement = () => {
-        setDurationSec(prevDuration => (prevDuration - minuteSeconds >= 0) ? prevDuration - minuteSeconds : 0);
+        setDurationSec(prevDuration => (prevDuration - secondsToHandle >= 0) ? prevDuration - secondsToHandle : 0);
     };
 
     const handleTimerComplete = async () => {
@@ -122,9 +122,9 @@ function Timer({setWonCard, setChestOpen}: TimerProps) {
                     setChestAvailable(false);
                 }}>
                     <img src="/chest-open.png" alt="chest" draggable="false"/>
-                    </div>
-                    :
-                    <div className={styles['chest-img']}>
+                </div>
+                :
+                <div className={styles['chest-img']}>
                     <img src="/chest.png" alt="chest" draggable="false"/>
                 </div>
             }
@@ -137,7 +137,7 @@ function Timer({setWonCard, setChestOpen}: TimerProps) {
                 <Button appearance={'small'} onClick={handleStart}><FontAwesomeIcon icon={faPlay}/></Button>}
             {isPlaying && <Button appearance={'small'} onClick={handleStop}><FontAwesomeIcon icon={faStop}/></Button>}
         </div>
-);
+    );
 }
 
 export default Timer;

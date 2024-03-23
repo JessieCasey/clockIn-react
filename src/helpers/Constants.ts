@@ -1,0 +1,1 @@
+export const VERSION = 'Teraina 0.1';

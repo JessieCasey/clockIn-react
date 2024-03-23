@@ -13,7 +13,7 @@ import {RequireAuth} from './helpers/RequireAuth.tsx';
 import {Greeting} from './pages/Greeting/Greeting.tsx';
 import {ConfirmLogin} from './pages/ConfirmLogin/ConfirmLogin.tsx';
 import {Cards} from './pages/Cards/Cards.tsx';
-
+import 'animate.css';
 
 const router = createBrowserRouter([
     {

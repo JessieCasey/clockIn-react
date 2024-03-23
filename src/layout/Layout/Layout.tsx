@@ -1,13 +1,15 @@
 import {Outlet, useNavigate} from 'react-router-dom';
 import Logo from '../../components/Logo/Logo.tsx';
 import styles from './Layout.module.css';
-import {getProfile, userActions} from "../../store/user.slice.ts";
-import {AppDispatch, RootState} from "../../store/store.ts";
+import {getProfile, userActions} from '../../store/user.slice.ts';
+import {AppDispatch, RootState} from '../../store/store.ts';
 import {useDispatch, useSelector} from 'react-redux';
 import Button from '../../components/Button/Button.tsx';
 import {useEffect, useState} from 'react';
 import SideBar from '../../components/SideBar/SideBar.tsx';
-import {fetchCardsAsync} from "../../store/cards.slice.ts";
+import {fetchCardsAsync} from '../../store/cards.slice.ts';
+import Paragraph from '../../components/Paragraph/Paragraph.tsx';
+import {VERSION} from "../../helpers/Constants.ts";
 
 export const Layout = () => {
     const navigate = useNavigate();
@@ -43,20 +45,27 @@ export const Layout = () => {
     }, []);
 
     return (
-        <div className={styles['layout']}>
-            <Logo/>
-            {jwt && <Button appearance={'small'} className={styles['exit']} onClick={logout}>
-                LogOut
-            </Button>}
-            <div className={styles['wrapper']}>
-                <div className={styles['sidebar']}>
-                    <SideBar showSidebar={showSidebar}/>
-                </div>
-                <div className={styles['content']}>
-                    <Outlet/>
+        <>
+            <div className={styles['layout']}>
+                <Logo/>
+                {jwt && <Button appearance={'small'} className={styles['exit']} onClick={logout}>
+                    LogOut
+                </Button>}
+                <div className={styles['wrapper']}>
+                    {jwt && <div className={styles['sidebar']}>
+                        <SideBar showSidebar={showSidebar}/>
+                    </div>}
+                    <div className={styles['content']}>
+                        <Outlet/>
+                    </div>
                 </div>
             </div>
+            <div className={styles['version']}>
+                {!jwt && <Paragraph>
+                    {VERSION}
+                </Paragraph>}
+            </div>
+        </>
 
-        </div>
     );
 };
