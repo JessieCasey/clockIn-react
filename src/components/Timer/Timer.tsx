@@ -134,7 +134,7 @@ function Timer({setWonCard, setChestOpen, isPlaying, setPlaying}: TimerProps) {
                 {!isPlaying && <Button appearance={'small-bold'} onClick={handleIncrement}>+</Button>}
             </div>}
             {(!isPlaying && remainingTime > 1) &&
-                <Button appearance={'small'} onClick={handleStart}><FontAwesomeIcon icon={faPlay}/></Button>}
+                <Button className={cn('animate__animated', 'animate__tada')} appearance={'small'} onClick={handleStart}><FontAwesomeIcon icon={faPlay}/></Button>}
             {isPlaying && <Button appearance={'small'} onClick={handleStop}><FontAwesomeIcon icon={faStop}/></Button>}
         </div>
     );

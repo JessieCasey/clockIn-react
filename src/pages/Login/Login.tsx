@@ -10,6 +10,7 @@ import Headline from '../../components/Heading/Headline.tsx';
 import Paragraph from '../../components/Paragraph/Paragraph.tsx';
 import {AppDispatch, RootState} from '../../store/store.ts';
 import CustomLink from '../../components/Link/CustomLink.tsx';
+import cn from "classnames";
 
 export type LoginForm = {
     email: {
@@ -51,7 +52,7 @@ export function Login() {
             <>
                 <Headline>Sign in</Headline>
                 {loginErrorMessage && <div className={styles['error']}>{loginErrorMessage}</div>}
-                <form className={styles['form']} onSubmit={submit}>
+                <form className={cn(styles['form'], 'animate__animated', 'animate__zoomIn')} onSubmit={submit}>
                     <Input id="email" name='email' placeholder='Email' labelText="Email"/>
                     <Paragraph>No password required. We will send you a link with access <br/> to your
                         account</Paragraph>

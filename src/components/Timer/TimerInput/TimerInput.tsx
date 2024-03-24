@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import styles from './TimerInput.module.css';
 import {TimerInputProps} from './TimerInput.props.ts';
+import cn from "classnames";
 
 function TimerInput({setDurationSec, remainingTime}: TimerInputProps) {
     const [inputHours, setInputHours] = useState<string>('0');
